@@ -78,7 +78,8 @@ pkt_mask16(uint8_t *a, uint8_t *am, uint8_t *b) {
     uint16_t *a1 = (uint16_t *) a;
     uint16_t *b1 = (uint16_t *) b;
     uint16_t *mask = (uint16_t *) am;
-    return (((*mask & *a1) ^ (*mask & ntohs(*b1))) == 0);
+
+    return (((~*mask) & (*a1 ^ ntohs(*b1))) == 0);
 }
 
 /* Returns true if two values of 16 bit size match, considering their masks. */
@@ -87,7 +88,7 @@ matches_mask16(uint8_t *a, uint8_t *am, uint8_t *b) {
     uint16_t *a1 = (uint16_t *) a;
     uint16_t *b1 = (uint16_t *) b;
     uint16_t *mask = (uint16_t *) am;
-    
+
     return (((*mask & *a1) ^ (*mask & *b1)) == 0);
 }
 
